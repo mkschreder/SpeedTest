@@ -1,0 +1,13 @@
+language: c
+sudo: required
+install:
+  - pip install --user cpp-coveralls
+script: autoreconf -if && ./configure --enable-code-coverage && make && ./src/speedtest
+after_success:
+  - coveralls
+addons:
+  apt:
+    packages:
+    - libcurl4-openssl-dev
+    - openssl
+    - libxml2-dev
