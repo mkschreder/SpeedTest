@@ -2,6 +2,7 @@
 // Created by Francesco Laurita on 5/29/16.
 //
 
+#include <stdlib.h>
 #include <cmath>
 #include <iomanip>
 #include "SpeedTest.h"
@@ -38,8 +39,8 @@ bool SpeedTest::ipInfo(IPInfo& info) {
         mIpInfo = IPInfo();
         mIpInfo.ip_address = values["ip_address"];
         mIpInfo.isp = values["isp"];
-        mIpInfo.lat = std::stof(values["lat"]);
-        mIpInfo.lon = std::stof(values["lon"]);
+        mIpInfo.lat = strtof(values["lat"].c_str(), NULL);
+        mIpInfo.lon = strtof(values["lon"].c_str(), NULL);
         values.clear();
         oss.clear();
         info = mIpInfo;
@@ -416,10 +417,10 @@ ServerInfo SpeedTest::processServerXMLNode(xmlTextReaderPtr reader) {
             info.id  = std::atoi((char*)server_id);
 
         if (server_lat)
-            info.lat = std::stof((char*)server_lat);
+            info.lat = strtof((char*)server_lat, NULL);
 
         if (server_lon)
-            info.lon = std::stof((char*)server_lon);
+            info.lon = strtof((char*)server_lon, NULL);
 
         xmlFree(server_url);
         xmlFree(server_lat);
