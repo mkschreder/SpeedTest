@@ -8,6 +8,7 @@ after_success:
 addons:
   apt:
     packages:
+    - lcov
     - libcurl4-openssl-dev
     - openssl
     - libxml2-dev
