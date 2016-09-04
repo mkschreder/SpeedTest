@@ -2,6 +2,8 @@
 // Created by Francesco Laurita on 6/3/16.
 //
 
+#include <stdio.h>
+#include <string.h>
 #include <sstream>
 #include "MD5Util.h"
 
@@ -15,7 +17,7 @@ std::string MD5Util::hexDigest(const std::string &str) {
 
     char hexDigest[33] = {'\0'};
     for (int i = 0; i < 16; i++)
-        std::sprintf(&hexDigest[i*2], "%02x", (unsigned int)digest[i]);
+        ::sprintf(&hexDigest[i*2], "%02x", (unsigned int)digest[i]);
 
     return std::string(hexDigest);
 }

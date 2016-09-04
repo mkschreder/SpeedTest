@@ -1,0 +1,20 @@
+language: cpp
+sudo: required
+install:
+  - pip install --user cpp-coveralls
+  # install gcc-4.8 with c++11 support: https://github.com/travis-ci-tester/travis-test-gcc-cxx-11
+  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+  - sudo apt-get update
+  - sudo apt-get install g++-4.8
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 90
+  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 90
+script: autoreconf -if && ./configure --enable-code-coverage && make && ./src/speedtest
+after_success:
+  - coveralls
+addons:
+  apt:
+    packages:
+    - lcov
+    - libcurl4-openssl-dev
+    - openssl
+    - libxml2-dev
